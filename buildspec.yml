@@ -27,6 +27,7 @@ phases:
       - echo "Done"
 build:
     commands:
+      - echo Build started on `date`
       - sbt executable
 artifacts:
   files:
