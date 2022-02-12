@@ -4,12 +4,12 @@ env:
     TEST_ENV_VARIABLE: gitbucket.war
 phases:
   install:
-    runtime-versions:
-      java: corretto8
+#     runtime-versions:
+#       java: corretto8
     commands:
       #Install JAVA 8
-      #- apt-get install -y openjdk-8-jdk
-      #- java -version
+      - apt-get install -y openjdk-8-jdk
+      - java -version
       #Install sbt
       - mkdir /working/
       - cd /working/
