@@ -1,0 +1,14 @@
+version: 0.2
+env:
+  variables:
+    TEST_ENV_VARIABLE: prodArtifacts
+phases:
+  install:
+    runtime-versions:
+      java: openjdk8
+build:
+    commands:
+      - sbt executable   # generate build
+  artifacts:
+     files:
+       - target/executable/gitbucket.war
