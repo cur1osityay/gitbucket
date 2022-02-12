@@ -6,7 +6,7 @@ phases:
   install:
     commands:
       #Install JAVA 8
-      - add-apt-repository ppa:openjdk-r/ppa
+      - add-apt-repository ppa:openjdk/ppa
       - apt-get update
       - apt-get install -y openjdk-8-jdk
       - java -version
