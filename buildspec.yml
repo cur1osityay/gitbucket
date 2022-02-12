@@ -8,7 +8,9 @@ phases:
 #       java: corretto8
     commands:
       #Install JAVA 8
-      - yum install -y openjdk-8-jdk
+      - add-apt-repository ppa:openjdk-r/ppa
+      - apt-get update
+      - apt-get install -y openjdk-8-jdk
       - java -version
       #Install sbt
       - mkdir /working/
@@ -16,8 +18,8 @@ phases:
       - curl -L -o sbt-1.5.7.deb https://repo.scala-sbt.org/scalasbt/debian/sbt-1.5.7.deb
       - dpkg -i sbt-1.5.7.deb
       - rm sbt-1.5.7.deb
-      - yum update
-      - yum install sbt
+      - apt-get update
+      - apt-get install sbt
       - cd
       - rm -r /working/
       - sbt sbtVersion
