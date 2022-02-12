@@ -9,6 +9,6 @@ phases:
 build:
     commands:
       - sbt executable   # generate build
-  artifacts:
-     files:
-       - target/executable/gitbucket.war
+    artifacts:
+      files:
+        - target/executable/gitbucket.war
