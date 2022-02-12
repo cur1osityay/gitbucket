@@ -1,7 +1,7 @@
 version: 0.2
 env:
   variables:
-    TEST_ENV_VARIABLE: prodArtifacts
+    TEST_ENV_VARIABLE: gitbucket.war
 phases:
   install:
     runtime-versions:
