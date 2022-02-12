@@ -28,6 +28,6 @@ phases:
 build:
     commands:
       - sbt executable
-    artifacts:
-      files:
-        - target/executable/gitbucket.war
+artifacts:
+  files:
+    - target/executable/gitbucket.war
