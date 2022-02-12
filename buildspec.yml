@@ -8,8 +8,8 @@ phases:
 #       java: corretto8
     commands:
       #Install JAVA 8
-      - add-apt-repository ppa:openjdk-r/ppa
-      - apt-get update
+#       - add-apt-repository ppa:openjdk-r/ppa
+#       - apt-get update
       - apt-get install -y openjdk-8-jdk
       - java -version
       #Install sbt
