@@ -1,34 +1,14 @@
-version: 0.2
-env:
-  variables:
-    TEST_ENV_VARIABLE: gitbucket.war
+version: 0.1
+
 phases:
-  install:
-#     runtime-versions:
-#       java: corretto8
-    commands:
-      #Install JAVA 8
-#       - add-apt-repository ppa:openjdk-r/ppa
-      - apt-get update
-      - apt-get install -y openjdk-8-jdk
-      - java -version
-      #Install sbt
-      - apt-get install -y curl
-      - mkdir /working/
-      - cd /working/
-      - curl -L -o sbt-1.5.7.deb https://repo.scala-sbt.org/scalasbt/debian/sbt-1.5.7.deb
-      - dpkg -i sbt-1.5.7.deb
-      - rm sbt-1.5.7.deb
-      - apt-get update
-      - apt-get install sbt
-      - cd
-      - rm -r /working/
-      - sbt sbtVersion
-      - echo "Done"
-build:
+  build:
     commands:
       - echo Build started on `date`
+  post_build:
+    commands:
+      - echo Build completed on `date`
       - sbt executable
+      - mv target/executable/gitbucket.war gitbucket.war
 artifacts:
   files:
-    - target/executable/gitbucket.war
+    - gitbucket.war
