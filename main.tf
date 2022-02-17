@@ -3,9 +3,9 @@ resource "aws_db_instance" "gitbucket_db" {
   engine               = "mysql"
   engine_version       = "5.7"
   instance_class       = "db.t2.micro"
-  name                 = "gitbucket"
-  username             = "test"
-  password             = "tes345t"
+  name                 = var.db_name
+  username             = var.db_user
+  password             = var.db_pass
   parameter_group_name = "default.mysql5.7"
   skip_final_snapshot  = true
 }
@@ -23,28 +23,27 @@ resource "aws_codebuild_project" "example" {
     type                   = "CODEPIPELINE"
   }
 
-  cache {
-    type     = "S3"
-    location = aws_s3_bucket.example.bucket
-  }
+  # cache {
+  #   type     = "S3"
+  #   location = aws_s3_bucket.example.bucket
+  # }
 
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
     image                       = "cur1osityay/scala-sbt"
-    image_pull_credentials_type = "CODEBUILD"
+    type                        = "LINUX_CONTAINER"
 
     environment_variable {
       name  = "GITBUCKET_DB_URL"
-      value = ""
+      value = gitbucket_db.name
     }
     environment_variable {
       name  = "GITBUCKET_DB_USER"
-      value = "SOME_VALUE2"
-      # type  = "PARAMETER_STORE"
+      value = var.db_user
     }
     environment_variable {
       name  = "GITBUCKET_DB_PASSWORD"
-      value = ""
+      value = var.db_pass
     }
   }
 source {

@@ -1,36 +1,12 @@
-variable "env" {
+variable "db_user" {
   description = "Depolyment environment"
-  default     = "dev"
+  default     = "test"
 }
-
-variable "region" {
-  description = "AWS region"
-  default     = "us-east-1"
+variable "db_pass" {
+  description = "Depolyment environment"
+  default     = "test"
 }
-
-
-
-variable "repository_branch" {
-  description = "Repository branch to connect to"
-  default     = "master"
-}
-
-# variable "repository_owner" {
-#   description = "GitHub repository owner"
-#   default     = "stojce"
-# }
-
-variable "repository_name" {
-  description = "GitHub repository name"
-  default     = "static-web-example"
-}
-
-variable "static_web_bucket_name" {
-  description = "S3 Bucket to deploy to"
-  default     = "static-web-example-bucket"
-}
-
-variable "artifacts_bucket_name" {
-  description = "S3 Bucket for storing artifacts"
-  default     = "artifacts-bucket"
+variable "db_name" {
+  description = "Depolyment environment"
+  default     = "gitbucket"
 }
