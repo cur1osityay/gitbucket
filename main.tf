@@ -15,7 +15,6 @@ resource "aws_codebuild_project" "example" {
   name          = "gitbucket_build"
   description   = "gitbucket codebuild"
   build_timeout = "5"
-  # service_role  = aws_iam_role.example.arn
 
   artifacts {
     encryption_disabled    = false
@@ -25,7 +24,7 @@ resource "aws_codebuild_project" "example" {
 
   # cache {
   #   type     = "S3"
-  #   location = aws_s3_bucket.example.bucket
+  #   location = 
   # }
 
   environment {
@@ -34,16 +33,19 @@ resource "aws_codebuild_project" "example" {
     type                        = "LINUX_CONTAINER"
 
     environment_variable {
-      name  = "GITBUCKET_DB_URL"
-      value = gitbucket_db.name
+      name  = "GITBUCKET_BASE_URL"
+      value = aws_db_instance.gitbucket_db.name
+      type  = "PARAMETER_STORE"
     }
     environment_variable {
       name  = "GITBUCKET_DB_USER"
       value = var.db_user
+      type  = "PARAMETER_STORE"
     }
     environment_variable {
       name  = "GITBUCKET_DB_PASSWORD"
       value = var.db_pass
+      type  = "PARAMETER_STORE"
     }
   }
 source {
