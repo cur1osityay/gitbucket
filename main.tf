@@ -5,19 +5,22 @@ resource "aws_db_instance" "gitbucket_db" {
   instance_class       = "db.t2.micro"
   name                 = "gitbucket"
   username             = "test"
-  password             = "test"
+  password             = "tes345t"
   parameter_group_name = "default.mysql5.7"
   skip_final_snapshot  = true
 }
+
 
 resource "aws_codebuild_project" "example" {
   name          = "gitbucket_build"
   description   = "gitbucket codebuild"
   build_timeout = "5"
-  service_role  = aws_iam_role.example.arn
+  # service_role  = aws_iam_role.example.arn
 
   artifacts {
-    type = "NO_ARTIFACTS"
+    encryption_disabled    = false
+    packaging              = "NONE"
+    type                   = "CODEPIPELINE"
   }
 
   cache {
@@ -27,19 +30,21 @@ resource "aws_codebuild_project" "example" {
 
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
-    image                       = "aws/codebuild/standard:1.0"
-    type                        = "LINUX_CONTAINER"
+    image                       = "cur1osityay/scala-sbt"
     image_pull_credentials_type = "CODEBUILD"
 
     environment_variable {
-      name  = "SOME_KEY1"
-      value = "SOME_VALUE1"
+      name  = "GITBUCKET_DB_URL"
+      value = ""
     }
-
     environment_variable {
-      name  = "SOME_KEY2"
+      name  = "GITBUCKET_DB_USER"
       value = "SOME_VALUE2"
-      type  = "PARAMETER_STORE"
+      # type  = "PARAMETER_STORE"
+    }
+    environment_variable {
+      name  = "GITBUCKET_DB_PASSWORD"
+      value = ""
     }
   }
 source {
