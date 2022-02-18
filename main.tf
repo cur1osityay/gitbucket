@@ -22,11 +22,6 @@ resource "aws_codebuild_project" "example" {
     type                   = "CODEPIPELINE"
   }
 
-  # cache {
-  #   type     = "S3"
-  #   location = 
-  # }
-
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
     image                       = "cur1osityay/scala-sbt"
@@ -58,5 +53,15 @@ source {
     }
   }
 source_version = "master"
+}
 
+resource "aws_elastic_beanstalk_application" "eb-app" {
+  name        = "eb-app"
+  description = "application gb"
+}
+
+resource "aws_elastic_beanstalk_configuration_environment" "eb-env" {
+  name                = "eb-env-config"
+  application         = aws_elastic_beanstalk_application.eb-app.name
+  solution_stack_name = "64bit Amazon Linux 2 v4.2.11 running Tomcat 8.5 Corretto 11"
 }
