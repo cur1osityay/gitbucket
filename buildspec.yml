@@ -3,7 +3,7 @@ version: 0.1
 phases:
   build:
     commands:
-      - echo ====== BUILD STARTED =========
+      - echo buildspec cur1osityay/gitbucket on use
   post_build:
     commands:
       - sbt executable
