@@ -3,10 +3,9 @@ version: 0.1
 phases:
   build:
     commands:
-      - echo Build started on `date`
+      - echo ====== BUILD STARTED =========
   post_build:
     commands:
-      - echo Build completed on `date`
       - sbt executable
       - mv target/executable/gitbucket.war gitbucket.war
 artifacts:
